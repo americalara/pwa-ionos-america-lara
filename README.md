@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# PWA Tareas - Implementación Profesional
+**Estudiante:** América Lara  
+**Docente:** Mike Cardona  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Resumen del Proyecto
+Esta es una PWA (Progressive Web App) desarrollada con **React + TypeScript + Vite**. El proyecto está contenerizado con **Docker** y desplegado en **AWS EC2**, utilizando **Nginx** como proxy inverso y **SSL (HTTPS)** para cumplir con los estándares de seguridad de las aplicaciones modernas.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Cumplimiento de Criterios (Investigación)
 
-## React Compiler
+### 1. Web App Manifest
+Configurado para permitir la instalación nativa.
+- **Icons:** Se incluyeron tamaños de 192px y 512px.
+- **Display:** `standalone` para eliminar la interfaz del navegador.
+- **Theme Color:** Ajustado para combinar con la paleta de colores (Rosa) de la interfaz.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 2. Service Workers
+Se implementó un Service Worker para:
+- Interceptar peticiones de red.
+- Permitir la carga de la aplicación en modo **Offline**.
+- Gestionar el ciclo de vida (Install, Activate, Fetch).
 
-## Expanding the ESLint configuration
+### 3. Estrategias de Caching
+Se utiliza la estrategia **Stale-While-Revalidate**:
+- Carga el contenido desde el caché para velocidad instantánea.
+- Actualiza el caché en segundo plano si hay conexión a internet.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 4. Seguridad (SSL/TLS)
+Cumpliendo con la rúbrica, el sitio cuenta con certificación de **Let's Encrypt**:
+- **Redirección:** Todo el tráfico HTTP (puerto 80) se redirige automáticamente a HTTPS (puerto 443).
+- **Importancia:** HTTPS es el requisito habilitador para que el Service Worker funcione por razones de seguridad.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Infraestructura y Despliegue
+- **Cloud:** AWS EC2 (Ubuntu).
+- **Docker:** Construcción multi-etapa para optimizar el tamaño de la imagen final.
+- **Proxy:** Nginx configurado en el Host para manejar el certificado SSL y pasar el tráfico al contenedor en el puerto 3000.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Enlace al Proyecto:
+[https://pwa-america-lara.duckdns.org](https://pwa-america-lara.duckdns.org)
