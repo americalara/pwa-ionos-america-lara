@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import './index.css'
+import './index.css'; // Mantiene la paleta de colores rosa y el fondo
+import './App.css';   // Aplica el centrado y el contenedor blanco
 
 function App() {
   const [tasks, setTasks] = useState<string[]>([]);
@@ -21,13 +22,20 @@ function App() {
   };
 
   return (
-    <div>
+    /* Añadimos la clase 'card' para que los estilos de App.css 
+       encierren todo en el contenedor blanco centrado */
+    <div className="card">
       <h1>Task Manager PWA</h1>
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={addTask}>Add</button>
+      
+      <div className="input-group">
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Escribe una tarea..."
+        />
+        <button onClick={addTask}>Add</button>
+      </div>
+
       <ul>
         {tasks.map((task, index) => (
           <li key={index}>{task}</li>
