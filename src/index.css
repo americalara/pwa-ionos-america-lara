@@ -1,68 +1,101 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Paleta de Rosas */
+  --pink-light: #fff0f6;
+  --pink-medium: #ffdeeb;
+  --pink-primary: #f06595;
+  --pink-dark: #c2255c;
+  --text-dark: #2c0e1a;
 
-  font-synthesis: none;
+  color-scheme: light;
+  color: var(--text-dark);
+  background-color: var(--pink-light);
+
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* Evita el scroll elástico para que parezca app nativa */
+  overscroll-behavior-y: contain; 
+}
+
+#root {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2.5rem;
   line-height: 1.1;
+  color: var(--pink-dark);
+  margin-bottom: 1.5rem;
 }
 
+/* Botones con juego de tonos rosas */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  border-radius: 12px;
+  border: 2px solid var(--pink-medium);
+  padding: 0.8em 1.6em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--pink-medium);
+  color: var(--pink-dark);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(240, 101, 149, 0.1);
 }
+
 button:hover {
-  border-color: #646cff;
+  background-color: var(--pink-primary);
+  color: white;
+  border-color: var(--pink-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(240, 101, 149, 0.2);
 }
+
+button:active {
+  transform: translateY(0);
+}
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 3px solid var(--pink-primary);
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Estilo para links en rosa */
+a {
+  font-weight: 500;
+  color: var(--pink-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--pink-dark);
+  text-decoration: underline;
+}
+
+/* Card contenedora para dar aspecto de App */
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(194, 37, 92, 0.08);
+  border: 1px solid var(--pink-medium);
 }
